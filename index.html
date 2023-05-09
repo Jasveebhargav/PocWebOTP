@@ -32,16 +32,40 @@
 	  
 	 
 <script>
-  if ('OTPCredential' in window) {
-	const otp = await navigator.credentials.get({
-		otp: {
-			transport: ['sms']
-		}
-	});
-    alert(otp);
-	if (otp.code) input.value = otp.code;
-
+  function autoReadSMS() {
+const signal = new AbortController();
+ setTimeout(() => {
+   signal.abort();
+ }, 1 * 60 * 1000); 
+ 
+ async function main() {
+   if ('OTPCredential' in window) {
+      try {
+         if (navigator.credentials) {
+            try {
+               await navigator.credentials
+               .get({ abort: signal, otp:{ transport: ['sms']}})
+               .then(content => {
+                 if (content && content.code) {
+                   alert(content.code);
+                 }
+               })
+               .catch(e => console.log(e));
+            } 
+            catch (e) {
+              return;
+            }
+         }
+      } 
+      catch (err) {
+        console.log(err);
+      }
+    }
+ }
+ main();
 }
+autoReadSMS();	
+	
 
 </script>
        
