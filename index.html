@@ -44,19 +44,15 @@
         ac.abort();
       });
     }
-	   alert('before get')
     navigator.credentials.get({
       otp: { transport:['sms'] },
       signal: ac.signal
-    }).then(otp => {
-	    alert('in call back')
-	 alert( otp.code);
+    }).then(otp => {	   
      input.value = otp.code;
       if (form) {
         form.submit()
       }
-    }).catch(err => {
-	      alert('in call back catch')
+    }).catch(err => {	   
       console.log(err);
     });
   });
