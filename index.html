@@ -49,8 +49,10 @@
       signal: ac.signal
     }).then(otp => {	   
      input.value = otp.code;
-      if (form) {
-        form.submit()
+      if (form) {        
+	  setTimeout(() => {
+		form.submit();
+	  }, 1000);      
       }
     }).catch(err => {	   
       console.log(err);
