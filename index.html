@@ -53,9 +53,10 @@
 	 alert( otp.code);
      input.value = otp.code;
       if (form) {
-        submit();
+        form.submit()
       }
     }).catch(err => {
+	      alert('in call back catch')
       console.log(err);
     });
   });
