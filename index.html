@@ -23,9 +23,9 @@
       
     </div>
     <div style="border:1px solid; padding: 5px; 10px; margin: 10px 0;">
-  <form>
-  <input autocomplete="one-time-code" required/>
-  <input type="submit">
+<form action="/">
+        Enter OTP here:
+        <input type="text" autocomplete="one-time-code" inputmode="numeric" id="otp-input" />
   </form>
     </div>
 	  
@@ -47,6 +47,7 @@
       otp: { transport:['sms'] },
       signal: ac.signal
     }).then(otp => {
+	    alert(otp.code);
       input.value = otp.code;
       if (form) form.submit();
     }).catch(err => {
