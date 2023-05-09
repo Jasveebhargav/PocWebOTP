@@ -32,9 +32,10 @@
 	  
 	 
 <script>
+ const input = document.querySelector('input[autocomplete="one-time-code"]');
+	
   if ('OTPCredential' in window) {
   window.addEventListener('DOMContentLoaded', e => {
-    const input = document.querySelector('input[autocomplete="one-time-code"]');
     if (!input) return;
     const ac = new AbortController();
     const form = input.closest('form');
@@ -43,13 +44,17 @@
         ac.abort();
       });
     }
+	   alert('before get')
     navigator.credentials.get({
       otp: { transport:['sms'] },
       signal: ac.signal
     }).then(otp => {
-	    alert(otp.code);
-      input.value = otp.code;
-      if (form) form.submit();
+	    alert('in call back')
+	 alert( otp.code);
+     input.value = otp.code;
+      if (form) {
+        submit();
+      }
     }).catch(err => {
       console.log(err);
     });
